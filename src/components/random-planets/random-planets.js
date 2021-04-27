@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import SwapiService from '../../services/swapi-service'
-import Spiner from '../spinner'
+import SwapiService from '../../services/swapi-service';
+import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 
 import './random-planets.css';
 
@@ -16,44 +17,62 @@ export default class RandomPlanet extends Component {
   state = {
     planet: {},
     loading: true,
-    // id: 2, 
-    // name: null,
-    // population: null,
-    // rotationPeriod: null,
-    // diameter: null
+    error: false,
   } 
+
   onLoadPlanet = (planet) => {
     this.setState({
       planet, 
       loading: false});
   }
 
+  onError = () => {
+    this.setState({
+      loading: false,
+      error: true
+    });
+    }
+
   updatePlanet() {
-    const id = Math.floor(Math.random()*15) + 2;
+    const id = 12000;
+    // const id = Math.floor(Math.random()*15) + 2;
     this.swapiService.getPlanet(id)
-    .then((res) => {
-      // console.log("UpPl", res)
-      this.onLoadPlanet(res);
-    })
+    .then(this.onLoadPlanet) // the same as below
+    // .then((res) => {
+    //   this.onLoadPlanet(res);
+    // })
+    .catch(this.onError)
   }
 
-
   render() {
-    const {
-      planet: {id = 2, name, population, rotationPeriod, diameter},
-      loading } = this.state;
-    
-    if (loading) { 
-      return Spiner();
-    }
+    const {planet, loading, error } = this.state;
+    const notError = !error && !loading; // !(error || loading)
+    const viewError = error ? <ErrorIndicator /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const viewPlanet = notError ? <ViewPlanet planet = {planet}/> : null;
+
 
     return (
       <div className="random-planet jumbotron rounded">
-        <img className="planet-image"
-             src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
+        {spinner}
+        {viewPlanet}
+        {viewError}
+      </div>
+
+    );
+  }
+}
+
+const ViewPlanet = ({planet}) => {
+  const {id, name, population, rotationPeriod, diameter} = planet;
+  
+  return (
+   <React.Fragment>
+        <img className="planet-image" 
+          src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} 
+          alt = 'Planet'/>
         <div>
           <h4>{name}</h4>
-
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
               <span className="term">Population</span>
@@ -69,10 +88,5 @@ export default class RandomPlanet extends Component {
             </li>
           </ul>
         </div>
-      </div>
-
-    );
-  }
+   </React.Fragment>)
 }
-
-
