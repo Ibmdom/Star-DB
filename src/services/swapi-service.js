@@ -3,7 +3,7 @@ export default class SwapiService {
   
   async getResource(url) {
     const res = await fetch(`${this._baseUrl}${url}`);
-    // console.log(`${this._baseUrl}${url}`, res);
+    console.log(`${this._baseUrl}${url}`, res);
     if (!res.ok) {
       throw new Error(`OOPPSS Could not fetch ${this._baseUrl}${url}, received ${res.status}`)
     }
@@ -12,12 +12,13 @@ export default class SwapiService {
   
   async getAllPeople() {
     const res = await this.getResource(`/people/`);
-    return res.results.map((el) => this._transformPeople(el));
+    return res.results.map((el) => this._transformPeople(el)).slice(0, 5);
     // return await this.getResource(`/people/`);
   }
 
   async getPerson(id) {
-    return await this.getResource(`/people/${id}/`);
+    const person = await this.getResource(`/people/${id}/`);
+    return this._transformPeople(person);
   }
 
   async getAllPlanet() {
@@ -66,12 +67,13 @@ export default class SwapiService {
   }
 
   _transformPeople(people) {
+    // console.log(people);
     return {
     id: this._extractId(people),
-    name: people.name
-    // population: planet.population,
-    // rotationPeriod: planet.rotation_period,
-    // diameter: planet.diameter
+    name: people.name,
+    gender: people.gender,
+    birthYear: people.birth_year,
+    eyeColor: people.eye_color
     }
   }
 
