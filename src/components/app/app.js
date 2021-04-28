@@ -42,8 +42,6 @@ export default class App extends Component {
       </button>
       <ErrorButton />
       <PeoplePage />
-      <PeoplePage />
-      <PeoplePage />
 
       {/* <PlanetDetails />
       <StarshipDetails /> */}

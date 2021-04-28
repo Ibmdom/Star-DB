@@ -23,6 +23,17 @@ export default class ItemList extends Component {
     console.log(err)
   }
 
+  renderItem(arr) {
+    return arr.map(({id, name}) => {
+      return (
+       <li className="list-group-item"
+         key={id}
+         onClick={() => {this.props.onPersonSelected(id)}}>
+         {name}
+      </li>)
+      }
+    );
+  }
 
 
   render() {
@@ -30,20 +41,10 @@ export default class ItemList extends Component {
     if (!peopleList) {
       return <Spinner />;
     }
-    const items = peopleList.map(({id, name}) => {
-      return (
-       <li className="list-group-item"
-         key={id}
-         onClick={() => {this.props.onPersonSelected(id)}}
-      >{name}
-      </li>)
-      }
-    );
-    // console.log(peopleList);
-    // console.log(items);
+
     return (
       <ul className="item-list list-group">
-        {items}
+        {this.renderItem(peopleList)}
       </ul>
     )
   }

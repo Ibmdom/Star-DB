@@ -12,7 +12,7 @@ export default class SwapiService {
   
   async getAllPeople() {
     const res = await this.getResource(`/people/`);
-    return res.results.map((el) => this._transformPeople(el)).slice(0, 5);
+    return res.results.map((el) => this._transformPeople(el)); //.slice(0, 5);
     // return await this.getResource(`/people/`);
   }
 
