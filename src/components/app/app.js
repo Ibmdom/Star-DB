@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from '../header';
-import PeoplePage from '../people-page';
+import ItemDetails from '../item-details';
 import ErrorButton from '../error-button';
 import ItemList from '../item-list';
 import SwapiService from '../../services/swapi-service';
@@ -11,11 +11,31 @@ import ErrorBoundry from '../error-boundry';
 
 import './app.css';
 
+const Row = ({left, right}) => {
+  return (
+    <div className = "row mb2">
+      <div className = "col-md-6">
+        {left}
+      </div>
+      <div className = "col-md-6">
+        {right}
+      </div>  
+    </div>
+  )
+}
+
 export default class App extends Component {
   swapiService = new SwapiService();
 
   state = {
     togglePlanet: true,
+    itemId: '1', 
+  }
+  
+  onItemSelected = (id) => {
+    this.setState({
+      itemId: id
+    })
   }
 
   onTogglePlanet = (oldToggle) => {
@@ -25,21 +45,45 @@ export default class App extends Component {
   }
   
   render() {
-    const {togglePlanet} = this.state;
+    const {togglePlanet, itemId} = this.state;
     const viewRandom = togglePlanet ? <RandomPlanet /> : null; 
+    const {getAllPeople, getPerson, getImgPerson,
+           getAllPlanet, getPlanet, getImgPlanet,
+           getAllStarship, getStarship, getImgStarship} = this.swapiService;
+
+    const itemList = (
+      <ItemList 
+      onItemSelected={this.onItemSelected} 
+      getData={getAllPeople}
+      >
+      {(e) => `${e.name} (${e.birthYear})`}
+      </ItemList>
+    );
+ 
+    const personDetails = (
+      <ErrorBoundry>
+        <ItemDetails itemId={itemId} 
+            getData={() => getPerson(itemId)}
+            getImgUrl={getImgPerson}
+            />
+      </ErrorBoundry>
+        );
+
     return (
     <div>
         <Header />
-      <ErrorBoundry>
-        {viewRandom}
-      </ErrorBoundry>
+        {/* {viewRandom} */}
       <button 
         className="toggle-planet btn btn-warning btn-lg"
         type='button' onClick={()=>this.onTogglePlanet(togglePlanet)}>
         Toggle Planet
       </button>
       <ErrorButton />
-      <PeoplePage />
+
+      <ErrorBoundry>
+        <Row left={itemList} right={personDetails} />
+      </ErrorBoundry>      
+
       <div className = "row mb2">
         <div className = "col-md-6">
           <ItemList onItemSelected={this.onPersonSelected} 

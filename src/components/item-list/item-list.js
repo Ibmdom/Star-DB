@@ -9,7 +9,7 @@ export default class itemList extends Component {
   }
   componentDidMount() {
     const { getData } = this.props;
-    // console.log(getData);
+    console.log('l',getData);
     getData()
       .then((itemList)=>{this.setState({itemList})})
       .catch((err) => {this.onError(err)});
@@ -19,7 +19,7 @@ export default class itemList extends Component {
     // console.log(err)
   }
 
-  renderitemList(arr) {
+  renderItemList(arr) {
     return arr.map((item) => {
       const {id} = item;
       const label = this.props.children(item);
@@ -43,7 +43,7 @@ export default class itemList extends Component {
 
     return (
       <ul className="item-list list-group">
-        {this.renderitemList(itemList)}
+        {this.renderItemList(itemList)}
       </ul>
     )
   }
