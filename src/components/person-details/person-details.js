@@ -38,7 +38,7 @@ export default class PersonDetails extends Component {
     // console.log(!this.state.person);
 
     if (!this.state.person) {
-      return (<span>Select a person fro a list</span>);
+      return (<span>Select a person from a list</span>);
     }
     // console.log('state', this.state.person.id);
     // console.log('pr',this.props.personId);
