@@ -35,13 +35,16 @@ export default class PersonDetails extends Component {
   }
 
   render() {
-    // console.log(this.state.person);
+    // console.log(!this.state.person);
+
+    if (!this.state.person) {
+      return (<span>Select a person fro a list</span>);
+    }
     // console.log('state', this.state.person.id);
     // console.log('pr',this.props.personId);
-
-    if (!this.state.person 
-      || (this.state.person &&(this.state.person.id !== this.props.personId))) {
-      return (<Spinner />)
+    // debugger;
+    if (this.state.person.id !== this.props.personId) {
+      return (<Spinner />);
     }
     const {id, name, gender, birthYear, eyeColor} = this.state.person
     // if (id !== this.props.personId) {

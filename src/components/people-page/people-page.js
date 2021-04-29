@@ -5,7 +5,7 @@ import ErrorIndicator from '../error-indicator';
 
 export default class PeoplePage extends Component {
   state = {
-    selectedPerson: 1, 
+    selectedPerson: '1', 
     hasError: false
   }
 
@@ -17,8 +17,7 @@ export default class PeoplePage extends Component {
   }
 
   componentDidCatch(error, info){
-    debugger;
-    
+     // debugger;
     this.setState({hasError: true});
   }
   

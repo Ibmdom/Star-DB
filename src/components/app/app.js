@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from '../header';
 import PeoplePage from '../people-page';
 import ErrorButton from '../error-button';
+import ItemList from '../item-list';
 // import PlanetDetails from '../planet-details';
 // import StarshipDetails from '../starship-details'
 import RandomPlanet from '../random-planets';
@@ -42,7 +43,14 @@ export default class App extends Component {
       </button>
       <ErrorButton />
       <PeoplePage />
-
+      <div className = "row mb2">
+        <div className = "col-md-6">
+          <ItemList onPersonSelected={this.onPersonSelected}/>
+         </div>
+        {/* <div className = "col-md-6">
+          <PersonDetails personId={selectedPerson} />
+        </div>   */}
+      </div>
       {/* <PlanetDetails />
       <StarshipDetails /> */}
     </div>
