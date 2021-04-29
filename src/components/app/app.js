@@ -28,7 +28,7 @@ export default class App extends Component {
   componentDidCatch(){
     this.setState({hasError: true});
   }
-  
+    
   render() {
     if (this.state.hasError) {
       return <ErrorIndicator />
@@ -49,17 +49,20 @@ export default class App extends Component {
       <div className = "row mb2">
         <div className = "col-md-6">
           <ItemList onItemSelected={this.onPersonSelected} 
-                    getData={this.swapiService.getAllPlanet}/>
+                    getData={this.swapiService.getAllPlanet}
+                    renderItem={(item) => {return <span>{item.name}
+                    <button >!!</button></span>}
+                    }/>
          </div>
       </div>
       <div className = "row mb2">
         <div className = "col-md-6">
           <ItemList onItemSelected={this.onPersonSelected} 
-                    getData={this.swapiService.getAllStarship}/>
+                    getData={this.swapiService.getAllStarship}
+                    renderItem={(item) => item.name}/>
          </div>
       </div>
     </div>
     );
   }
 };
-

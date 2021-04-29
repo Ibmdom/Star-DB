@@ -9,6 +9,7 @@ export default class itemList extends Component {
   }
   componentDidMount() {
     const { getData } = this.props;
+    // console.log(getData);
     getData()
       .then((itemList)=>{this.setState({itemList})})
       .catch((err) => {this.onError(err)});
@@ -19,12 +20,14 @@ export default class itemList extends Component {
   }
 
   renderitemList(arr) {
-    return arr.map(({id, name}) => {
+    return arr.map((item) => {
+      const {id} = item;
+      const label = this.props.renderItem(item);
       return (
        <li className="list-group-item"
          key={id}
          onClick={() => {this.props.onItemSelected(id)}}>
-         {name}
+         {label}
       </li>)
       }
     );
@@ -32,6 +35,7 @@ export default class itemList extends Component {
 
 
   render() {
+    console.log(this.props);
     const {itemList} = this.state;
     if (!itemList) {
       return <Spinner />;
