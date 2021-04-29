@@ -22,7 +22,7 @@ export default class itemList extends Component {
   renderitemList(arr) {
     return arr.map((item) => {
       const {id} = item;
-      const label = this.props.renderItem(item);
+      const label = this.props.children(item);
       return (
        <li className="list-group-item"
          key={id}
@@ -35,7 +35,7 @@ export default class itemList extends Component {
 
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const {itemList} = this.state;
     if (!itemList) {
       return <Spinner />;
