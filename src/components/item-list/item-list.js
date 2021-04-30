@@ -9,7 +9,7 @@ export default class itemList extends Component {
   }
   componentDidMount() {
     const { getData } = this.props;
-    console.log('l',getData);
+    // console.log('l',getData);
     getData()
       .then((itemList)=>{this.setState({itemList})})
       .catch((err) => {this.onError(err)});

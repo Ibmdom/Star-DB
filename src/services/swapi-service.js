@@ -11,7 +11,8 @@ export default class SwapiService {
   }
 
   getImgStarship = (id) => {
-    return `${this._imgUrl}starships"/${id}.jpg`;
+    console.log(`${this._imgUrl}starships/${id}.jpg`);
+    return `${this._imgUrl}starships/${id}.jpg`;
   }
 
   getResource = async (url) => {
