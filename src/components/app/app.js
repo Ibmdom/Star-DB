@@ -6,6 +6,15 @@ import ItemList from '../item-list';
 import SwapiService from '../../services/swapi-service';
 import RandomPlanet from '../random-planets';
 import ErrorBoundry from '../error-boundry';
+import {ViewList} from '../hoc-helpers';
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList 
+ } from '../sw-components';
 
 import './app.css';
 
@@ -45,48 +54,58 @@ export default class App extends Component {
   render() {
     const {togglePlanet, itemId} = this.state;
     const viewRandom = togglePlanet ? <RandomPlanet /> : null; 
-    const {getAllPeople, getPerson, getImgPerson,
-           getAllPlanet, getPlanet, getImgPlanet,
-           getAllStarship, getStarship, getImgStarship} = this.swapiService;
+    // const {getAllPeople, getPerson, getImgPerson,
+    //        getAllPlanet, getPlanet, getImgPlanet,
+    //        getAllStarship, getStarship, getImgStarship} = this.swapiService;
 
-    const itemList = (
-      <ItemList 
-      onItemSelected={this.onItemSelected} 
-      getData={getAllPeople}
-      >
-      {(e) => `${e.name} (${e.birthYear})`}
-      </ItemList>
-    );
+    // const itemList = (ViewList( 
+    //   <ItemList 
+    //   onItemSelected={this.onItemSelected} 
+    //   // getData={getAllPeople}
+    //   >
+    //   {(e) => `${e.name} (${e.birthYear})`}
+    //   </ItemList>, getAllPeople)
+
+    // );
+
+    // const itemList = (
+    //   <ItemList 
+    //   onItemSelected={this.onItemSelected} 
+    //   getData={getAllPeople}
+    //   >
+    //   {(e) => `${e.name} (${e.birthYear})`}
+    //   </ItemList>
+    // );
  
-    const personDetails = (
-      <ItemDetails itemId={itemId} 
-        getData={getPerson}
-        getImgUrl={getImgPerson}>
-        <Record field="gender" label="Gender:" />
-        <Record field="birthYear" label="Birth Year:" />
-        <Record field="eyeColor" label="Eye Color:" />
-      </ItemDetails>
-    );
+    // const personDetails = (
+    //   <ItemDetails itemId={itemId} 
+    //     getData={getPerson}
+    //     getImgUrl={getImgPerson}>
+    //     <Record field="gender" label="Gender:" />
+    //     <Record field="birthYear" label="Birth Year:" />
+    //     <Record field="eyeColor" label="Eye Color:" />
+    //   </ItemDetails>
+    // );
 
-    const planetDetails = (
-      <ItemDetails itemId={'5'} 
-        getData={getPlanet}
-        getImgUrl={getImgPlanet}>
+    // const planetDetails = (
+    //   <ItemDetails itemId={'5'} 
+    //     getData={getPlanet}
+    //     getImgUrl={getImgPlanet}>
 
-      </ItemDetails>
-    );
+    //   </ItemDetails>
+    // );
 
-    const starshipDetails = (
-      <ItemDetails itemId={'10'} 
-        getData={getStarship}
-        getImgUrl={getImgStarship}>
-        <Record field="model" label="Model:" />
-        <Record field="manufacturer" label="Manufacturer:" />
-        <Record field="length" label="Length:" />
-        <Record field="passengers" label="Passengers:" />
-      </ItemDetails>
-    );
-
+    // const starshipDetails = (
+    //   <ItemDetails itemId={'10'} 
+    //     getData={getStarship}
+    //     getImgUrl={getImgStarship}>
+    //     <Record field="model" label="Model:" />
+    //     <Record field="manufacturer" label="Manufacturer:" />
+    //     <Record field="length" label="Length:" />
+    //     <Record field="passengers" label="Passengers:" />
+    //   </ItemDetails>
+    // );
+     console.log(PersonList);  
     return (
     <div>
       <Header />
@@ -98,7 +117,13 @@ export default class App extends Component {
       </button>
 
       <ErrorBoundry>
-        <Row left={itemList} right={personDetails} />
+        <Row left={
+          <PersonList onItemSelected={this.onItemSelected} >
+             {(e) => `${e.name} (${e.birthYear})`}
+          </PersonList>
+        } right={
+          <PersonDetails itemId = {'1'} />
+          } />
       </ErrorBoundry>      
 
       {/* <ErrorBoundry>
@@ -109,13 +134,13 @@ export default class App extends Component {
              right={planetDetails} 
         />
       </ErrorBoundry>       */}
-      <ErrorBoundry>
-        <Row left={<ItemList onItemSelected={this.onPersonSelected} 
+      {/* <ErrorBoundry>
+        <Row left={<ItemList onItemSelected={() =>{}} 
                     getData={getAllStarship}>
                     {(item) => item.name}
                   </ItemList>}
              right={starshipDetails} />
-      </ErrorBoundry>      
+      </ErrorBoundry>       */}
     </div>
     );
   }

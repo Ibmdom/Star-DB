@@ -11,7 +11,6 @@ export default class SwapiService {
   }
 
   getImgStarship = (id) => {
-    console.log(`${this._imgUrl}starships/${id}.jpg`);
     return `${this._imgUrl}starships/${id}.jpg`;
   }
 
