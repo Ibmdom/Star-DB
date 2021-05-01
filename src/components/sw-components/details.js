@@ -7,7 +7,7 @@ const {
   getPlanet,
   getStarship,
   getImgPerson,
-  getImgPlanet,
+  getImgPlanet, 
   getImgStarship
 } = new SwapiService();
 
