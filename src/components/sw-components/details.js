@@ -24,9 +24,31 @@ const PersonDetails = ({itemId}) => {
   )
 }
 
-const PlanetDetails = () => {}
+const PlanetDetails = ({ itemId }) => {
+  return (
+    <ItemDetails
+      itemId={itemId}
+      getData={getPlanet}
+      getImgUrl={getImgPlanet}>
+      <Record field="population" label="Population:" />
+      <Record field="rotationPeriod" label="Rotation Period:" />
+      <Record field="diameter" label="Diameter:" />
+    </ItemDetails>
+  )
+}
 
-const StarshipDetails = () => {}
+const StarshipDetails = ({ itemId }) => {
+  return (
+    <ItemDetails itemId={itemId}
+      getData={getStarship}
+      getImgUrl={getImgStarship}>
+      <Record field="model" label="Model:" />
+      <Record field="manufacturer" label="Manufacturer:" />
+      <Record field="length" label="Length:" />
+      <Record field="passengers" label="Passengers:" />
+    </ItemDetails>
+  )
+}
 
 export {
  PersonDetails,

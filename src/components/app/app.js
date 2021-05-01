@@ -105,7 +105,7 @@ export default class App extends Component {
     //     <Record field="passengers" label="Passengers:" />
     //   </ItemDetails>
     // );
-     console.log(PersonList);  
+    //  console.log(PersonList);  
     return (
     <div>
       <Header />
@@ -118,29 +118,23 @@ export default class App extends Component {
 
       <ErrorBoundry>
         <Row left={
-          <PersonList onItemSelected={this.onItemSelected} >
-             {(e) => `${e.name} (${e.birthYear})`}
-          </PersonList>
+          <PersonList onItemSelected={this.onItemSelected} />
         } right={
-          <PersonDetails itemId = {'1'} />
+          <PersonDetails itemId = {1} />
           } />
+        <Row left={
+          <PlanetList />
+        } right={
+          <PlanetDetails itemId = {4} />
+          } />
+        <Row left={
+          <StarshipList />
+        } right={
+          <StarshipDetails itemId = {10} />
+          } />
+
       </ErrorBoundry>      
 
-      {/* <ErrorBoundry>
-        <Row left={<ItemList onItemSelected={this.onPersonSelected} 
-                    getData={getAllPlanet}>
-                    {(item) => {return <span>{item.name}</span>}}
-                    </ItemList>} 
-             right={planetDetails} 
-        />
-      </ErrorBoundry>       */}
-      {/* <ErrorBoundry>
-        <Row left={<ItemList onItemSelected={() =>{}} 
-                    getData={getAllStarship}>
-                    {(item) => item.name}
-                  </ItemList>}
-             right={starshipDetails} />
-      </ErrorBoundry>       */}
     </div>
     );
   }

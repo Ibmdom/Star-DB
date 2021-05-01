@@ -25,8 +25,6 @@ export default class ItemDetails extends Component {
     if (!itemId){
       return;
     }
-    // console.log(this.props);
-    // console.log(this);
     getData(itemId)
     .then((item)=>{
       this.setState({
@@ -41,18 +39,17 @@ export default class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId) {
+    if (this.props.itemId !== String(prevProps.itemId)) {
       this.updateItem();
     }
-
   }
 
   render() {
     if (!this.state.item) {
       return (<span>Select a item from a list</span>);
     }
-    if (this.state.item.id !== this.props.itemId) {
-      // console.log(this.state.item.id, this.props.itemId);
+    if (this.state.item.id !== String(this.props.itemId)) {
+      // console.log(typeof this.state.item.id, typeof this.props.itemId);
       return (<Spinner />);
     }
     // console.log(this.props.children)

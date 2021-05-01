@@ -1,2 +1,2 @@
-import ViewList from './with-data';
-export {ViewList};
+import withData from './with-data';
+export {withData};
