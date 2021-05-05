@@ -8,8 +8,6 @@ const withData = (View, getData) => {
     }
   
     componentDidMount() {
-      // console.log(this.props);
-      // const { getData } = this.props;
       getData()
         .then((data)=>{this.setState({data})})
         .catch((err) => {this.onError(err)});

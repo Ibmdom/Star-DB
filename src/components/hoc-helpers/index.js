@@ -1,2 +1,3 @@
 import withData from './with-data';
-export {withData};
+import withSwService from './with-sw-service';
+export {withData, withSwService};
