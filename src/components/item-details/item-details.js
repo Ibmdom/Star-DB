@@ -40,9 +40,6 @@ export default class ItemDetails extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.itemId !== prevProps.itemId) {
-//       console.log(this.props.itemId, String(prevProps.itemId));
-//       console.log(typeof this.props.itemId, typeof String(prevProps.itemId));
-// debugger;
       this.updateItem();
     }
   }
@@ -52,12 +49,10 @@ export default class ItemDetails extends Component {
       return (<span>Select a item from a list</span>);
     }
     if (this.state.item.id !== String(this.props.itemId)) {
-      // console.log(typeof this.state.item.id, typeof this.props.itemId);
       return (<Spinner />);
     }
-    // console.log(this.props.children)
     const {item, imgItem} = this.state;
-    const {id, name, gender, birthYear, eyeColor} = item;
+    const {name} = item;
 
     return (
       <div className="item-details card">
