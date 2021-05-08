@@ -4,6 +4,7 @@ import Header from '../header';
 // import ErrorButton from '../error-button';
 // import ItemList from '../item-list';
 import SwapiService from '../../services/swapi-service';
+import DemoSwapiService from '../../services/demo-swapi-service';
 import RandomPlanet from '../random-planets';
 import ErrorBoundry from '../error-boundry';
 import {SwapiServiceProvider, SwapiServiceConsumer} from '../sw-service-context';

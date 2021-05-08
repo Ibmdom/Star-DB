@@ -22,6 +22,8 @@ export default class ItemDetails extends Component {
   
   updateItem() {
     const {itemId, getData, getImgUrl} = this.props;
+    // console.log(itemId, getData, getImgUrl);
+    // console.log(this.props);
     if (!itemId){
       return;
     }
@@ -48,12 +50,15 @@ export default class ItemDetails extends Component {
     if (!this.state.item) {
       return (<span>Select a item from a list</span>);
     }
+  
+    // console.log(this.state.item.id, String(this.props.itemId));
     if (this.state.item.id !== String(this.props.itemId)) {
       return (<Spinner />);
     }
     const {item, imgItem} = this.state;
     const {name} = item;
-
+console.log(this.state);
+// debugger;
     return (
       <div className="item-details card">
         <img className="item-image" 
