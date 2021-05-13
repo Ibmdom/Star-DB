@@ -31,7 +31,7 @@ export default class ItemDetails extends Component {
         item,
         imgItem: getImgUrl(itemId)
       });}) 
-    .catch((err) => {console.log('Ошибка', err)})
+    // .catch((err) => {console.log('Ошибка', err)})
   }
 
   componentDidMount() {
