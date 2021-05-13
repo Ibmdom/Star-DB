@@ -34,11 +34,11 @@ const Row = ({left, right}) => {
 }
 
 export default class App extends Component {
-  swapiService = new SwapiService();
 
   state = {
     togglePlanet: true,
     itemId: null, //'1', 
+    swapiService: new DemoSwapiService(),
   }
 
   onItemSelected = (id) => {
@@ -47,6 +47,18 @@ export default class App extends Component {
     })
   }
 
+  onToggleDemo = () => {
+   this.setState(({swapiService})=>{
+     console.log(swapiService instanceof DemoSwapiService);
+     console.log(swapiService instanceof SwapiService);
+     const swService = swapiService instanceof DemoSwapiService
+       ? SwapiService
+       : DemoSwapiService;
+      //  console.log(swService);
+       return {swapiService: new swService};
+   })
+  }
+  
   onTogglePlanet = (oldToggle) => {
     this.setState({
       togglePlanet: !oldToggle
@@ -54,14 +66,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { togglePlanet, itemId } = this.state;
+    const { togglePlanet, itemId, swapiService } = this.state;
     const viewRandom = togglePlanet ? <RandomPlanet /> : null;
-
+    console.log(swapiService);
     return (
       <ErrorBoundry>
-        <SwapiServiceProvider value={this.swapiService}>
+        <SwapiServiceProvider value={swapiService}>
           <div>
-            <Header />
+            <Header onToggleDemo={(swapiService)=>{this.onToggleDemo(swapiService)}}/>
             {/* {viewRandom} */}
             <button
               className="toggle-planet btn btn-warning btn-lg"
