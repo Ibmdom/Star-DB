@@ -3,9 +3,7 @@ import React from 'react';
 import './header.css';
 
 const Header = (props) => {
-  // console.log(props);
   const {onToggleDemo} = props;
-  // console.log(onToggleDemo);
   return (
     <div className = "header d-flex">
       <h3>

@@ -23,16 +23,12 @@ const withData = (View) => {
 
     componentDidUpdate(prevProps) {
       if (this.props.getData !== prevProps.getData) {
-        // console.log('n', this.props.getData);
-        // console.log('old', prevProps.getData);
-        // debugger;
         this.onUpdate();
       }
     }
 
     render () {
       const {data} = this.state;
-      // console.log(data);
       if (!data) {
         return <Spinner />;
       }

@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import Header from '../header';
-// import ItemDetails, {Record} from '../item-details';
-// import ErrorButton from '../error-button';
-// import ItemList from '../item-list';
 import SwapiService from '../../services/swapi-service';
 import DemoSwapiService from '../../services/demo-swapi-service';
 import RandomPlanet from '../random-planets';
 import ErrorBoundry from '../error-boundry';
-import {SwapiServiceProvider, SwapiServiceConsumer} from '../sw-service-context';
+import {SwapiServiceProvider} from '../sw-service-context';
 
 import {
   PersonDetails,
@@ -38,7 +35,7 @@ export default class App extends Component {
   state = {
     togglePlanet: true,
     itemId: null, //'1', 
-    swapiService: new DemoSwapiService(),
+    swapiService: new SwapiService(),
   }
 
   onItemSelected = (id) => {
@@ -49,12 +46,9 @@ export default class App extends Component {
 
   onToggleDemo = () => {
    this.setState(({swapiService})=>{
-     console.log(swapiService instanceof DemoSwapiService);
-     console.log(swapiService instanceof SwapiService);
      const swService = swapiService instanceof DemoSwapiService
        ? SwapiService
        : DemoSwapiService;
-      //  console.log(swService);
        return {swapiService: new swService};
    })
   }
@@ -74,7 +68,7 @@ export default class App extends Component {
         <SwapiServiceProvider value={swapiService}>
           <div>
             <Header onToggleDemo={(swapiService)=>{this.onToggleDemo(swapiService)}}/>
-            {/* {viewRandom} */}
+            {viewRandom}
             <button
               className="toggle-planet btn btn-warning btn-lg"
               type='button' onClick={() => this.onTogglePlanet(togglePlanet)}>

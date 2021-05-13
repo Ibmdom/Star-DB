@@ -37,18 +37,13 @@ export default class RandomPlanet extends Component {
     }
 
   updatePlanet() {
-    // const id = 10;
     const id = Math.floor(Math.random()*15) + 2;
     this.swapiService.getPlanet(id)
     .then(this.onLoadPlanet) // the same as below
-    // .then((res) => {
-    //   this.onLoadPlanet(res);
-    // })
     .catch(this.onError)
   }
 
   render() {
-    // console.log('render');
     const {planet, loading, error } = this.state;
     const notError = !error && !loading; // !(error || loading)
     const viewError = error ? <ErrorIndicator /> : null;

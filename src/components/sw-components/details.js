@@ -3,7 +3,6 @@ import ItemDetails, {Record} from '../item-details';
 import {SwapiServiceConsumer} from '../sw-service-context';
 
 const PersonDetails = ({itemId}) => {
-  // debugger;
   return (
     <SwapiServiceConsumer >
       {({getPerson, getImgPerson}) => {

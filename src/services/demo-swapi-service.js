@@ -1,6 +1,4 @@
 export default class DemoSwapiService {
-  // _baseUrl = 'https://swapi.dev/api';
-  // _imgUrl = 'https://starwars-visualguide.com/assets/img/';
 
   getImgPerson = (id) => {
     return `./img/2.jpg`;

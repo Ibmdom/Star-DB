@@ -1,6 +1,5 @@
 export default class SwapiService {
   _baseUrl = 'https://swapi.dev/api';
-  // _baseUrl = 'https://starwars-visualguide.com/assets';
   _imgUrl = 'https://starwars-visualguide.com/assets/img/';
 
   getImgPerson = (id) => {
@@ -73,7 +72,6 @@ export default class SwapiService {
   }
 
   _transformStarship = (starship) => {
-    // console.log(starship);
     return {
     id: this._extractId(starship),
     name: starship.name,
